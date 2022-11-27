@@ -1,3 +1,4 @@
+package Common;
 /**
  * A static class to define useful constants and functions when doing math for Nuggets.
  * 
