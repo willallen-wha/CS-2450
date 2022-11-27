@@ -1,4 +1,4 @@
-package Prototypes;
+package Common.Prototypes;
 
 // Use BigDecimal class for accuracy
 import java.math.BigDecimal;
