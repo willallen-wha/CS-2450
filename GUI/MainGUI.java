@@ -9,7 +9,7 @@ public class MainGUI {
         CalcGUI calc = new CalcGUI();
         JFrame frame = new JFrame("CS-2450 Project");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(500, 400);
         frame.add(calc);
         frame.setVisible(true);
     }
