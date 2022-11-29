@@ -1,4 +1,4 @@
-package checkUsername;
+package Auth;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,13 +33,13 @@ public class Authenticator {
 			} while (user == false);
 	}
 
-	public static Boolean users (String inputedUser, String inputedPass) throws IOException {
+	public static Boolean users(String inputedUser, String inputedPass) throws IOException {
 		//Creating Variables
 		boolean found = false;
 		String fileUser = null;
 		
 		//Finds the file
-		File passwords = new File ("C:\\Users\\bluej\\eclipse-workspace\\Autentication\\src\\checkUsername\\Users.txt");
+		File passwords = new File("Auth\\Users.txt");
 		//Creating file reader
 		Scanner fileReader = new Scanner(passwords);
 		
