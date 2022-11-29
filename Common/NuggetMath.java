@@ -27,7 +27,7 @@ public class NuggetMath {
 
     /**
      * Returns (as a BigDecimal) the weight required for the new weight to be some percentage larger than the original weight.
-     * The values input are both doubles, but for the sake of accuracy, the return type is a BigDecimal rounded to 20 digits.
+     * The values input are both doubles, but for the sake of accuracy, the return type is a BigDecimal rounded to 5 digits.
      * <p>
      * For example, amountForPercentage(99, 1) will return 1 since a 99 pound person who ate a pound of chicken nuggets would 
      * be 100 pounds, one percentage (a single pound) of which is chicken nuggets.
@@ -44,7 +44,7 @@ public class NuggetMath {
         BigDecimal weight;
 
         //The general formula is orginal weight times percent over 100 minus percent. Source: trust me I did the math
-        weight = (new BigDecimal(percent * orig)).divide(new BigDecimal(100 - percent), new MathContext(20));
+        weight = (new BigDecimal(percent * orig)).divide(new BigDecimal(100 - percent), new MathContext(5));
         
         //Return it
         return weight;
@@ -53,7 +53,7 @@ public class NuggetMath {
     /**
      * Returns (as a BigDecimal) the number of nuggest required for the new weight to be some percentage larger than the 
      * original weight. The values input are both doubles, but in the sake of accuracy, the return type is a BigDecimal 
-     * rounded to 20 digits. This function will simply call amountForPercent with the given inputs and then factor in the 
+     * rounded to 5 digits. This function will simply call amountForPercent with the given inputs and then factor in the 
      * weight of a nugget.
      * 
      * @param orig The original weight of the person as a double
@@ -70,6 +70,25 @@ public class NuggetMath {
         BigDecimal weight = amountForPercent(orig, percent);
         
         //Return it
-        return weight.divide(nuggetWeightPounds, new MathContext(20));
+        return weight.divide(nuggetWeightPounds, new MathContext(5));
+    }
+
+
+    /**
+     * Rounds a BigDecimal up to the next highest integer.
+     * 
+     * @param rounder The BigDecimal to be rounded up.
+     * 
+     * @return The BigDecimal rounded up.
+     * 
+     */
+    public static int roundUp(BigDecimal rounder) {
+        //If the BigDecimal is an exact integer
+        if(rounder.intValue() == rounder.doubleValue()) {
+            return rounder.intValue();
+        }
+        else {
+            return rounder.intValue() + 1;
+        }
     }
 }
