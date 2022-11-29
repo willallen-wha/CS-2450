@@ -29,6 +29,7 @@ public class CalcGUI extends JPanel{
 	// Some constant error codes
 	private static final String ERR_BADPERCENT = "Bad percent";
 	private static final String ERR_PERCENT100 = "Percentage of 100";
+	private static final String ERR_NONLOGICAL = "Non-logical argument";
 	private static final String ERR_BADWEIGHT = "Bad weight";
 
 	// Hashmap of valid button ActionEvents
@@ -103,9 +104,13 @@ public class CalcGUI extends JPanel{
 
     	percentExact = new JTextField();
     	percentExact.setFont(new Font("Tahoma", Font.PLAIN, 18));
-    	c = new GridBagConstraints();
-    	c.insets = new Insets(0, 10, 0, 10);
+		percentExact.addActionListener(customListener);
     	percentExact.setColumns(10);
+		percentExact.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {update();}
+			public void keyPressed(KeyEvent e) {update();}
+			public void keyReleased(KeyEvent e) {update();}});
+    	c = new GridBagConstraints(); c.insets = new Insets(0, 10, 0, 10);
     	c.gridwidth = 6; c.fill = GridBagConstraints.HORIZONTAL; c.gridx = 0; c.gridy = 1;
 		percentExact.setVisible(false);
     	percentInputs.add(percentExact, c);
@@ -125,6 +130,10 @@ public class CalcGUI extends JPanel{
     	weightInput = new JTextField();
 		weightInput.setText("99");
     	weightInput.setColumns(10);
+		weightInput.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {update();}
+			public void keyPressed(KeyEvent e) {update();}
+			public void keyReleased(KeyEvent e) {update();}});
     	weightText.add(weightInput);
     	
     	weightButtons = new JPanel();
@@ -271,7 +280,7 @@ public class CalcGUI extends JPanel{
     	// Add everything in
     	this.add(inputs);
     	this.add(outputs);
-        
+
 		// Validate and update
 		this.validate();
 		this.update();
@@ -304,10 +313,7 @@ public class CalcGUI extends JPanel{
 		if(desiredPercent == -1) {
 			error(ERR_BADPERCENT);
 			return;
-		} else if(desiredPercent == 100) {
-			error(ERR_PERCENT100);
 		}
-		
 		double currentWeight = getWeight();
 		if(currentWeight == -1) {
 			error(ERR_BADWEIGHT);
@@ -315,8 +321,18 @@ public class CalcGUI extends JPanel{
 		}
 
 		// Calculate values
-		BigDecimal pounds = NuggetMath.amountForPercent(currentWeight, desiredPercent);
-		BigDecimal nuggets = NuggetMath.numberNuggets(currentWeight, desiredPercent);
+		BigDecimal pounds, nuggets;
+		try {
+			pounds = NuggetMath.amountForPercent(currentWeight, desiredPercent);
+			nuggets = NuggetMath.numberNuggets(currentWeight, desiredPercent);
+		} catch(IllegalArgumentException ill) {
+			error(ERR_NONLOGICAL);
+			return;
+		} catch(ArithmeticException e) {
+			e.printStackTrace();
+			error(ERR_PERCENT100);
+			return;
+		}
 
 		// Begin output
 		if(exact.isSelected()) {
