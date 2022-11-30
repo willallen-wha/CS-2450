@@ -3,6 +3,7 @@ package Auth;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import Common.*;
 
 public class Authenticator {
 	public static void main (String[] args) throws IOException {
@@ -39,7 +40,7 @@ public class Authenticator {
 		String fileUser = null;
 		
 		//Finds the file
-		File passwords = new File("Auth\\Users.txt");
+		File passwords = new File(AdjustOS.USERSPATH);
 		//Creating file reader
 		Scanner fileReader = new Scanner(passwords);
 		
