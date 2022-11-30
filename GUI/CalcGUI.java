@@ -110,7 +110,7 @@ public class CalcGUI extends JPanel{
 			public void keyTyped(KeyEvent e) {update();}
 			public void keyPressed(KeyEvent e) {update();}
 			public void keyReleased(KeyEvent e) {update();}});
-    	c = new GridBagConstraints(); c.insets = new Insets(0, 10, 0, 10);
+    	c = new GridBagConstraints(); c.insets = new Insets(9, 10, 8, 10);
     	c.gridwidth = 6; c.fill = GridBagConstraints.HORIZONTAL; c.gridx = 0; c.gridy = 1;
 		percentExact.setVisible(false);
     	percentInputs.add(percentExact, c);
@@ -139,68 +139,82 @@ public class CalcGUI extends JPanel{
     	weightButtons = new JPanel();
     	weightInputs.add(weightButtons);
     	l = new GridBagLayout();
-    	l.columnWidths = new int[]{0, 0, 0, 0}; l.rowHeights = new int[]{0, 0, 0, 0, 0};
-    	l.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE}; l.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    	l.columnWidths = new int[]{0, 0, 0, 0}; l.rowHeights = new int[]{30, 30, 30, 30, 30};
+    	l.columnWeights = new double[]{0.5, 0.5, 0.5, Double.MIN_VALUE}; l.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
     	weightButtons.setLayout(l);
     	
+		int centerOff = 75, topOff = 15;
+
     	btn1 = new JButton("1");
 		btn1.setActionCommand("1"); btn1.addActionListener(customListener);
-    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 0; c.gridy = 0;
+    	c = new GridBagConstraints(); c.insets = new Insets(topOff, centerOff, 5, 5); c.gridx = 0; c.gridy = 0;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn1, c);
     	
     	btn2 = new JButton("2");
 		btn2.setActionCommand("2"); btn2.addActionListener(customListener);
-    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 1; c.gridy = 0;
+    	c = new GridBagConstraints(); c.insets = new Insets(topOff, 5, 5, 5); c.gridx = 1; c.gridy = 0;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn2, c);
     	
     	btn3 = new JButton("3");
 		btn3.setActionCommand("3"); btn3.addActionListener(customListener);
-    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 2; c.gridy = 0;
+    	c = new GridBagConstraints(); c.insets = new Insets(topOff, 5, 5, centerOff); c.gridx = 2; c.gridy = 0;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn3, c);
 
     	btn4 = new JButton("4");
 		btn4.setActionCommand("4"); btn4.addActionListener(customListener);
-    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 0; c.gridy = 1;
+    	c = new GridBagConstraints(); c.insets = new Insets(5, centerOff, 5, 5); c.gridx = 0; c.gridy = 1;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn4, c);
     	
     	btn5 = new JButton("5");
 		btn5.setActionCommand("5"); btn5.addActionListener(customListener);
     	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 1; c.gridy = 1;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn5, c);
     	
     	btn6 = new JButton("6");
 		btn6.setActionCommand("6"); btn6.addActionListener(customListener);
-    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 2; c.gridy = 1;
+    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, centerOff); c.gridx = 2; c.gridy = 1;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn6, c);
 
     	btn7 = new JButton("7");
 		btn7.setActionCommand("7"); btn7.addActionListener(customListener);
-    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 0; c.gridy = 2;
+    	c = new GridBagConstraints(); c.insets = new Insets(5, centerOff, 5, 5); c.gridx = 0; c.gridy = 2;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn7, c);
     	
     	btn8 = new JButton("8");
 		btn8.setActionCommand("8"); btn8.addActionListener(customListener);
     	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 1; c.gridy = 2;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn8, c);
     	
     	btn9 = new JButton("9");
 		btn9.setActionCommand("9"); btn9.addActionListener(customListener);
-    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 2; c.gridy = 2;
+    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, centerOff); c.gridx = 2; c.gridy = 2;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn9, c);
 
     	btnClr = new JButton("C");
 		btnClr.setActionCommand("C"); btnClr.addActionListener(customListener);
-    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 0; c.gridy = 3;
+    	c = new GridBagConstraints(); c.insets = new Insets(5, centerOff, 5, 5); c.gridx = 0; c.gridy = 3;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btnClr, c);
     	
     	btn0 = new JButton("0");
 		btn0.setActionCommand("0"); btn0.addActionListener(customListener);
     	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 1; c.gridy = 3;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btn0, c);
     	
     	btnPer = new JButton(".");
 		btnPer.setActionCommand("."); btnPer.addActionListener(customListener);
-    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, 5); c.gridx = 2; c.gridy = 3;
+    	c = new GridBagConstraints(); c.insets = new Insets(5, 5, 5, centerOff); c.gridx = 2; c.gridy = 3;
+		c.fill = GridBagConstraints.BOTH;
     	weightButtons.add(btnPer, c);
 
     	// Add everything in
@@ -223,7 +237,7 @@ public class CalcGUI extends JPanel{
     	modeLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
     	modeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
     	c = new GridBagConstraints();
-    	c.insets = new Insets(10, 0, 5, 0); c.anchor = GridBagConstraints.NORTH;
+    	c.insets = new Insets(5, 0, 5, 0); c.anchor = GridBagConstraints.NORTH;
     	c.gridx = 0; c.gridy = 0; c.gridwidth = 2;
     	outputs.add(modeLabel, c);
     	
@@ -277,6 +291,14 @@ public class CalcGUI extends JPanel{
     	c.gridx = 0; c.gridy = 5; c.gridwidth = 2;
         outputs.add(numNuggets, c);
         
+		// Logout button
+		JButton logoutButton = new JButton("Sign Out");
+        logoutButton.setFont(new Font("Tahoma", Font.ITALIC, 15));
+		logoutButton.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {requestExit();}});
+    	c = new GridBagConstraints(); c.insets = new Insets(30, 0, 20, 0);
+        c.fill = GridBagConstraints.NONE; c.gridx = 0; c.gridy = 6; c.gridwidth = 2;
+		outputs.add(logoutButton, c);
+
     	// Add everything in
     	this.add(inputs);
     	this.add(outputs);
@@ -347,6 +369,9 @@ public class CalcGUI extends JPanel{
 		}
 
         System.out.println("Something happened");
+
+		// Validate
+		this.validate();
     }
 
 	/**
@@ -411,6 +436,18 @@ public class CalcGUI extends JPanel{
 				return -1;
 			}
 		}
+	}
+
+	/**
+	 * Method for requesting closure of self. Used for signing out, and calls the static closure method
+	 * in MainGUI.java. Results in destruction of this GUI element in memory.
+	 * 
+	 * @param none
+	 * @return none
+	 * @see MainGUI.exit
+	 */
+	private void requestExit() {
+		MainGUI.exit(this);
 	}
 
 	private void error(String error) {
