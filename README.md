@@ -6,6 +6,6 @@ This repository is used to house all code for SUU's CS 2450: Software Engineerin
 
 ### More resources
 
-The google drive with notes can be found here: https://docs.google.com/document/d/1ECoRXQS1rdQKZnKfOFCRbL8A43fEJi45eHs1L3IxXAA/edit?usp=sharing
+The google drive with notes can be found here: https://drive.google.com/drive/folders/1fZlVwVm8uGvvkH6gECNQubL1YJOmwTUQ?usp=sharing
 
 No more info is available for now. For questions about codebase, check the comments and Javadocs provided within the files.
