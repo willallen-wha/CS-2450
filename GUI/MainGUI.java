@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import Common.*;
 
 public class MainGUI {
 
@@ -17,13 +18,13 @@ public class MainGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
             Image logo;
-            logo = ImageIO.read(new File("GUI\\Graphics\\Logo.png"));
+            logo = ImageIO.read(new File(AdjustOS.LOGOPATH));
             frame.setIconImage(logo);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Couldn't find file, using default logo.");
         }
-        frame.setSize(500, 400);
+        frame.setSize(AdjustOS.FRAMEWIDTH, 400);
         // Create a new auth window to force sign-in
         AuthGUI auth = new AuthGUI();
         frame.add(auth);
