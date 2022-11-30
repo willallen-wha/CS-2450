@@ -8,10 +8,12 @@ import java.io.IOException;
 
 public class MainGUI {
 
+    public static JFrame frame;
+
     public static void main(String args[]) {
 
         // Set up look and feel of window
-        JFrame frame = new JFrame("CS-2450 Project");
+        frame = new JFrame("CS-2450 Project");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
             Image logo;
@@ -22,10 +24,10 @@ public class MainGUI {
             System.out.println("Couldn't find file, using default logo.");
         }
         frame.setSize(500, 400);
-        frame.setVisible(true);
         // Create a new auth window to force sign-in
         AuthGUI auth = new AuthGUI();
         frame.add(auth);
+        frame.setVisible(true);
 
     }
 
@@ -38,6 +40,18 @@ public class MainGUI {
      * @return None.
      */
     public static void exit(JPanel p) {
-        //TODO Create code which switches between GUI options
+        // Check requested close type
+        // If it's an Auth GUI, auth is complete, replace it with a new Calc GUI
+        frame.remove(p);
+        if(p instanceof AuthGUI) {
+            CalcGUI calc = new CalcGUI();
+            frame.add(calc);
+        }
+        // If it's a Calc GUI, logout requested, replace it with a new Auth GUI
+        else if(p instanceof CalcGUI) {
+            AuthGUI auth = new AuthGUI();
+            frame.add(auth);
+        }
+        frame.validate();
     }
 }
