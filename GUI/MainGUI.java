@@ -23,7 +23,7 @@ public class MainGUI {
             e.printStackTrace();
             System.out.println("Couldn't find file, using default logo.");
         }
-        frame.setSize(500, 400);
+        frame.setSize(580, 400);
         // Create a new auth window to force sign-in
         AuthGUI auth = new AuthGUI();
         frame.add(auth);
