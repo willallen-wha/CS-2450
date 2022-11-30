@@ -31,7 +31,7 @@ public class AuthGUI extends JPanel {
         GridBagConstraints c;
 
         // Status label, which is blank
-        statusLabel = new JLabel("<html>Test Label<br></html>"); statusLabel.setFont(new Font("Monospaced", Font.PLAIN, 15));
+        statusLabel = new JLabel("<html><br></html>"); statusLabel.setFont(new Font("Monospaced", Font.PLAIN, 15));
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER); statusLabel.setVerticalAlignment(SwingConstants.CENTER);
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH; c.weighty = 1; c.gridx = 0; c.gridy = 0; c.gridwidth = 3;
