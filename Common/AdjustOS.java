@@ -24,6 +24,8 @@ public class AdjustOS {
      * ensure proper file traversal for auth and logo usage.
      */
     public static void detectOS() {
+        // Make sure not already set
+        if(isOSSet()) return;
         // Request OS details from computer and clean resulting string
         String temp = System.getProperty("os.name").toLowerCase().trim();
         // Check for recognized OS

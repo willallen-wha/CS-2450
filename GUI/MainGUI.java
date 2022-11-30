@@ -3,6 +3,7 @@ package GUI;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Image;
+import java.awt.Taskbar;
 import java.io.File;
 import java.io.IOException;
 import Common.*;
@@ -13,16 +14,28 @@ public class MainGUI {
 
     public static void main(String args[]) {
 
+        // Make sure OS is set
+        AdjustOS.detectOS();
+
         // Set up look and feel of window
         frame = new JFrame("CS-2450 Project");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        final Taskbar taskbar = Taskbar.getTaskbar();
         try {
             Image logo;
             logo = ImageIO.read(new File(AdjustOS.LOGOPATH));
             frame.setIconImage(logo);
+            // Attempt to set the Apple dock as well
+            if(AdjustOS.OS == AdjustOS.MAC) taskbar.setIconImage(logo);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Couldn't find file, using default logo.");
+        } catch (SecurityException e) {
+            e.printStackTrace();
+            System.out.println("Security error setting the logo, using the default logo.");
+        } catch (UnsupportedOperationException e) {
+            e.printStackTrace();
+            System.out.println("Error detecting the OS, using default logo.");
         }
         frame.setSize(AdjustOS.FRAMEWIDTH, 400);
         // Create a new auth window to force sign-in
