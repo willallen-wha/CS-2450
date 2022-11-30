@@ -15,7 +15,7 @@ public class AuthGUI extends JPanel {
     private JPasswordField password;
     private JButton signInButton;
 
-    private static String ERR_IO = "<html>Error accessing users. Please check network and try again.</html>";
+    private static String ERR_IO = "<html>Error accessing users.<br>Please check network<br>and try again.</html>";
     private static String ERR_BAD_CRED = "<html>Invalid username/password.<br>Please try again.</html>";
 
     /**
