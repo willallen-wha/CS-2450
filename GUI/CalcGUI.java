@@ -110,7 +110,7 @@ public class CalcGUI extends JPanel{
 			public void keyTyped(KeyEvent e) {update();}
 			public void keyPressed(KeyEvent e) {update();}
 			public void keyReleased(KeyEvent e) {update();}});
-    	c = new GridBagConstraints(); c.insets = new Insets(0, 10, 0, 10);
+    	c = new GridBagConstraints(); c.insets = new Insets(9, 10, 8, 10);
     	c.gridwidth = 6; c.fill = GridBagConstraints.HORIZONTAL; c.gridx = 0; c.gridy = 1;
 		percentExact.setVisible(false);
     	percentInputs.add(percentExact, c);
@@ -237,7 +237,7 @@ public class CalcGUI extends JPanel{
     	modeLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
     	modeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
     	c = new GridBagConstraints();
-    	c.insets = new Insets(10, 0, 5, 0); c.anchor = GridBagConstraints.NORTH;
+    	c.insets = new Insets(5, 0, 5, 0); c.anchor = GridBagConstraints.NORTH;
     	c.gridx = 0; c.gridy = 0; c.gridwidth = 2;
     	outputs.add(modeLabel, c);
     	
@@ -291,6 +291,14 @@ public class CalcGUI extends JPanel{
     	c.gridx = 0; c.gridy = 5; c.gridwidth = 2;
         outputs.add(numNuggets, c);
         
+		// Logout button
+		JButton logoutButton = new JButton("Sign Out");
+        logoutButton.setFont(new Font("Tahoma", Font.ITALIC, 15));
+		logoutButton.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {requestExit();}});
+    	c = new GridBagConstraints(); c.insets = new Insets(30, 0, 20, 0);
+        c.fill = GridBagConstraints.NONE; c.gridx = 0; c.gridy = 6; c.gridwidth = 2;
+		outputs.add(logoutButton, c);
+
     	// Add everything in
     	this.add(inputs);
     	this.add(outputs);
@@ -361,6 +369,9 @@ public class CalcGUI extends JPanel{
 		}
 
         System.out.println("Something happened");
+
+		// Validate
+		this.validate();
     }
 
 	/**
@@ -425,6 +436,18 @@ public class CalcGUI extends JPanel{
 				return -1;
 			}
 		}
+	}
+
+	/**
+	 * Method for requesting closure of self. Used for signing out, and calls the static closure method
+	 * in MainGUI.java. Results in destruction of this GUI element in memory.
+	 * 
+	 * @param none
+	 * @return none
+	 * @see MainGUI.exit
+	 */
+	private void requestExit() {
+		MainGUI.exit(this);
 	}
 
 	private void error(String error) {
