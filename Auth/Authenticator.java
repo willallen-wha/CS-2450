@@ -1,6 +1,5 @@
-package Auth;
-
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import Common.*;
@@ -40,9 +39,9 @@ public class Authenticator {
 		String fileUser = null;
 		
 		//Finds the file
-		File passwords = new File(AdjustOS.USERSPATH);
+		File users = new File(AdjustOS.USERSPATH);
 		//Creating file reader
-		Scanner fileReader = new Scanner(passwords);
+		Scanner fileReader = new Scanner(users);
 		
 		//Goes through the file
 		while(fileReader.hasNextLine()) {
@@ -58,5 +57,18 @@ public class Authenticator {
 		
 		//Returns if the password was found or not
 		return found;
+	}
+	
+	public static void createNewUser(String inputedUser, String inputedPass) throws IOException{
+		//Finds the file
+		File users = new File(AdjustOS.USERSPATH);
+		//Creating file writer
+		FileWriter fileWriter = new FileWriter(users);
+		
+		//Write the new user to the file
+		fileWriter.write(inputedUser + " " + inputedPass);
+		
+		//Closes the file writer
+		fileWriter.close();
 	}
 }
