@@ -1,3 +1,5 @@
+package Auth;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -47,7 +49,7 @@ public class Authenticator {
 		while(fileReader.hasNextLine()) {
 			fileUser = fileReader.nextLine();
 			//Tests each line of the file against inputed password
-			if(fileUser.contains(inputedUser) && fileUser.contains(inputedPass)) {
+			if(fileUser.equals(inputedUser + " " + inputedPass)) {
 				found = true;
 			}
 		}
@@ -63,10 +65,10 @@ public class Authenticator {
 		//Finds the file
 		File users = new File(AdjustOS.USERSPATH);
 		//Creating file writer
-		FileWriter fileWriter = new FileWriter(users);
+		FileWriter fileWriter = new FileWriter(users, true);
 		
 		//Write the new user to the file
-		fileWriter.write(inputedUser + " " + inputedPass);
+		fileWriter.write(System.getProperty("line.separator") + inputedUser + " " + inputedPass);
 		
 		//Closes the file writer
 		fileWriter.close();

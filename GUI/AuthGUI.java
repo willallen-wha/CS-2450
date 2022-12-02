@@ -13,7 +13,7 @@ public class AuthGUI extends JPanel {
     private JLabel usernameLabel, passwordLabel, statusLabel;
     private JTextField username;
     private JPasswordField password;
-    private JButton signInButton;
+    private JButton signInButton, registerButton;
 
     private static String ERR_IO = "<html>Error accessing users.<br>Please check network<br>and try again.</html>";
     private static String ERR_BAD_CRED = "<html>Invalid username/password.<br>Please try again.</html>";
@@ -31,10 +31,10 @@ public class AuthGUI extends JPanel {
         GridBagConstraints c;
 
         // Status label, which is blank
-        statusLabel = new JLabel("<html><br></html>"); statusLabel.setFont(new Font("Monospaced", Font.PLAIN, 15));
+        statusLabel = new JLabel("<html><br><br></html>"); statusLabel.setFont(new Font("Monospaced", Font.PLAIN, 15));
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER); statusLabel.setVerticalAlignment(SwingConstants.CENTER);
         c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH; c.weighty = 1; c.gridx = 0; c.gridy = 0; c.gridwidth = 3;
+        c.fill = GridBagConstraints.BOTH; c.weighty = 1; c.gridx = 0; c.gridy = 0; c.gridwidth = 4;
         this.add(statusLabel, c);
 
         // Sign-in username field
@@ -65,8 +65,15 @@ public class AuthGUI extends JPanel {
         signInButton = new JButton("Sign In");
         signInButton.addActionListener(customListener);
         c = new GridBagConstraints();
-        c.fill = GridBagConstraints.NONE; c.weighty = 1; c.gridx = 0; c.gridy = 3; c.gridwidth = 3;
+        c.fill = GridBagConstraints.NONE; c.weighty = 1; c.gridx = 0; c.gridy = 3; c.gridwidth = 1;
         this.add(signInButton, c);
+
+        // Register button
+        registerButton = new JButton("Register");
+        registerButton.addActionListener(customListener);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.NONE; c.weighty = 1; c.gridx = 3; c.gridy = 3; c.gridwidth = 1;
+        this.add(registerButton, c);
 
     }
 
@@ -77,11 +84,18 @@ public class AuthGUI extends JPanel {
             if(e.getSource() == username) {
                 password.requestFocusInWindow();
             }
-            // Otherwise, attempt the sign-in.
+            // Otherwise, attempt the sign-in or register
             else {
-                // Did the sign in authenticate?
                 try {
-                    if(Authenticator.users(username.getText(), String.valueOf(password.getPassword()))) {
+                    String user = username.getText();
+                    String pass = String.valueOf(password.getPassword());
+                    // Trying to register?
+                    if(e.getSource() == registerButton) {
+                        Authenticator.createNewUser(user, pass);
+                        statusLabel.setText("<html>User successfully registered.<br>Please sign in.</html>");
+                    }
+                    //Trying to sign in?
+                    else if(Authenticator.users(user, pass)) {
                         // Sign in sucessful, request closure
                         statusLabel.setText("Success! Logging you in...");
                         requestExit();
