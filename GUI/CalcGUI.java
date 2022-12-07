@@ -368,8 +368,6 @@ public class CalcGUI extends JPanel{
 			numNuggets.setText(NuggetMath.roundUp(nuggets) + "");
 		}
 
-        System.out.println("Something happened");
-
 		// Validate
 		this.validate();
     }
