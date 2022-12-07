@@ -30,6 +30,9 @@ public class AuthGUI extends JPanel {
 
         GridBagConstraints c;
 
+        //Add a splash of color
+        this.setBackground(new Color(42, 206, 88));
+
         // Status label, which is blank
         statusLabel = new JLabel("<html><br><br></html>"); statusLabel.setFont(new Font("Monospaced", Font.PLAIN, 15));
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER); statusLabel.setVerticalAlignment(SwingConstants.CENTER);
