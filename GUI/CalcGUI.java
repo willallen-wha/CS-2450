@@ -3,6 +3,8 @@ package GUI;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.MouseInputAdapter;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.math.BigDecimal;
@@ -330,6 +332,10 @@ public class CalcGUI extends JPanel{
      * to inform what should be output. Should only be called internally.
      */
     private void update() {
+		//Clear any potential listener of the error field
+		for(MouseListener m: numNuggets.getMouseListeners()) {
+			numNuggets.removeMouseListener(m);
+		}
 		// Begin gathering inputs
 		double desiredPercent = getPercent();
 		if(desiredPercent == -1) {
@@ -351,7 +357,6 @@ public class CalcGUI extends JPanel{
 			error(ERR_NONLOGICAL);
 			return;
 		} catch(ArithmeticException e) {
-			e.printStackTrace();
 			error(ERR_PERCENT100);
 			return;
 		}
@@ -408,7 +413,9 @@ public class CalcGUI extends JPanel{
 	}
 
 	private double getWeight() {
-		return validateDouble(weightInput.getText());
+		double result = validateDouble(weightInput.getText());
+		if(result < 0) result = -1;
+		return result;
 	}
 
 	/**
@@ -417,10 +424,14 @@ public class CalcGUI extends JPanel{
 	 * @return The string interperated as a double value.
 	 */
 	private double validateDouble(String s) {
-		// Do a little cleaning
-		s = s.trim();
 		// Remove any percent sign if present
 		s = s.replaceAll("%", "");
+		// Remove all commas
+		s = s.replaceAll(",", "");
+		//Remove the pound abbreviation if present
+		s = s.replaceAll("lbs", "");
+		// Remove all spaces that the cleaning may have caused
+		s = s.trim();
 		// If the text is empty, assume 0.
 		if(s.equals("")) {
 			return 0;
@@ -430,7 +441,6 @@ public class CalcGUI extends JPanel{
 			try {
 				return Double.valueOf(s);
 			} catch(Exception e) {
-				e.printStackTrace();
 				return -1;
 			}
 		}
@@ -451,6 +461,50 @@ public class CalcGUI extends JPanel{
 	private void error(String error) {
 		//Output that there has been an error
 		numPounds.setText("ERR");
-		numNuggets.setText("ERR");
+
+		//Output the useful bit of the error
+		String errorMessage = error;
+		if(error == ERR_BADPERCENT) {
+			numNuggets.setText("<html>E1<u>(?)</u><html>");
+			errorMessage += "\nA bad percentage was entered." +
+			"\nThis likely means there is an unrecognized character included." +
+			"\nPlease remove everything which isn't a number.";
+		}
+		else if(error == ERR_BADWEIGHT) {
+			numNuggets.setText("<html>E2<u>(?)</u><html>");
+			errorMessage += "\nA bad weight was entered." +
+			"\nThis likely means there is an unrecognized character included." +
+			"\nPlease remove everything which isn't a number. Also ensure" +
+			"\nthat the entered weight is positive and includes at most one period.";
+		}
+		else if(error == ERR_NONLOGICAL) {
+			numNuggets.setText("<html>E3<u>(?)</u><html>");
+			errorMessage += "\nA non-logical input was given." +
+			"\nThis likely means the percentage is a non-logical value." +
+			"\nNegative percentages or percentages over 100 can result in" +
+			"\nthis error. Please double check that the percentage makes sense.";
+		}
+		else if(error == ERR_PERCENT100) {
+			numNuggets.setText("<html>E4<u>(?)</u><html>");
+			errorMessage += "\nA percentage of 100 was entered." +
+			"\nThis is not mathematically possible. Please enter" +
+			"\na percentage between 0 and 100.";
+		}
+		else {
+			numNuggets.setText("<html>E5<u>(?)</u><html>");
+			errorMessage += "\nAn unknown error was encountered" +
+			"\nPlease notify the software distributer and include" +
+			"\na description of how this error was encountered.";
+		}
+
+		//The message dialouge prefers a final string
+		final String err = errorMessage;
+
+		//Add a link to notify the user of this error
+		numNuggets.addMouseListener(new MouseInputAdapter() {
+			public void mousePressed(MouseEvent e) {
+				JOptionPane.showMessageDialog(numNuggets.getParent(), err);
+			}
+		});
 	}
 }

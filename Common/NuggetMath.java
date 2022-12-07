@@ -39,10 +39,14 @@ public class NuggetMath {
      * 
      * @throws ArithmeticException If the percentage is 100%, the BigInteger divides by zero and returns an error.
      * @throws IllegalArgumentException If the percentage is over 100%, the argument is non-logical and returns an error.
+     * @throws IllegalArgumentException If the percentage is less than 0%, the argument is non-logical and returns an error.
     */
     public static BigDecimal amountForPercent(double orig, double percent) throws IllegalArgumentException {
         //Check the input for illogical input
         if(percent > 100) {
+            throw new IllegalArgumentException();
+        }
+        else if(percent < 0) {
             throw new IllegalArgumentException();
         }
         //New weight needed for consumption
