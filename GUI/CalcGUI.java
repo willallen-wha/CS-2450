@@ -47,7 +47,7 @@ public class CalcGUI extends JPanel{
      * @return A new instance of a JPanel object to be used in the calculator.
      */
     public CalcGUI() {
-    	
+
     	// Establish the gridbag objects for later use
     	GridBagLayout l;
     	GridBagConstraints c;
@@ -300,6 +300,18 @@ public class CalcGUI extends JPanel{
     	c = new GridBagConstraints(); c.insets = new Insets(30, 0, 20, 0);
         c.fill = GridBagConstraints.NONE; c.gridx = 0; c.gridy = 6; c.gridwidth = 2;
 		outputs.add(logoutButton, c);
+
+
+        // Add a splash of color to the panels
+		Color outputsColor = new Color(246, 255, 0);
+		Color buttonColor = new Color(0, 0, 255);
+        outputs.setBackground(outputsColor);
+        exact.setBackground(outputsColor);
+        rounded.setBackground(outputsColor);
+		percentInputs.setBackground(Color.RED);
+		percentSlider.setBackground(Color.RED);
+		weightText.setBackground(Color.RED);
+		weightButtons.setBackground(buttonColor);
 
     	// Add everything in
     	this.add(inputs);

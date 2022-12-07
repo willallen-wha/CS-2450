@@ -30,7 +30,7 @@ public class AuthGUI extends JPanel {
 
         GridBagConstraints c;
 
-        //Add a splash of color
+        // Add a splash of color
         this.setBackground(new Color(42, 206, 88));
 
         // Status label, which is blank
