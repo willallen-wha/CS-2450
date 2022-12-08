@@ -59,16 +59,19 @@ public class CalcGUI extends JPanel{
     	// Manager Panel
     	inputs = new JPanel();
     	inputs.setLayout(new BorderLayout(0, 0));
+		inputs.setOpaque(false);
     	
     	// Panel which contains percent selector
     	percentInputs = new JPanel();
     	l = new GridBagLayout();
     	l.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     	percentInputs.setLayout(l);
+		percentInputs.setOpaque(false);
     	
         // Label
         percentLabel = new JLabel("Desired Percentage:");
         percentLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		percentLabel.setOpaque(false);
         c = new GridBagConstraints();
         c.insets = new Insets(20, 10, 5, 0);
         c.fill = GridBagConstraints.HORIZONTAL; c.weightx = 0.5; c.gridx = 0; c.gridy = 0; c.gridwidth = 3;
@@ -93,6 +96,7 @@ public class CalcGUI extends JPanel{
         });
         percentSlider.setMajorTickSpacing(10); percentSlider.setMinorTickSpacing(1);
         percentSlider.setPaintTicks(true); percentSlider.setPaintLabels(true);
+		percentSlider.setOpaque(false);
         c = new GridBagConstraints();
         c.gridx = 0; c.weightx = 1; c.gridy = 1; c.gridwidth = 5;
         percentInputs.add(percentSlider, c);
@@ -120,6 +124,7 @@ public class CalcGUI extends JPanel{
     	// Panel which contains weight input
     	weightInputs = new JPanel();
     	weightInputs.setLayout(new BoxLayout(weightInputs, BoxLayout.Y_AXIS));
+		weightInputs.setOpaque(false);
     	
     	weightText = new JPanel();
     	weightInputs.add(weightText);
@@ -127,6 +132,7 @@ public class CalcGUI extends JPanel{
     	weightLabel = new JLabel("Current Weight:   ");
     	weightLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
     	weightText.add(weightLabel);
+		weightText.setOpaque(false);
     	weightLabel.setLabelFor(weightInput);
     	
     	weightInput = new JTextField();
@@ -139,6 +145,7 @@ public class CalcGUI extends JPanel{
     	weightText.add(weightInput);
     	
     	weightButtons = new JPanel();
+		weightButtons.setOpaque(false);
     	weightInputs.add(weightButtons);
     	l = new GridBagLayout();
     	l.columnWidths = new int[]{0, 0, 0, 0}; l.rowHeights = new int[]{30, 30, 30, 30, 30};
@@ -232,6 +239,7 @@ public class CalcGUI extends JPanel{
     	l.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
     	l.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0};
     	outputs.setLayout(l);
+		outputs.setOpaque(false);
     	
     	// Output mode selector
     	modeLabel = new JLabel("Output Mode");
@@ -246,12 +254,14 @@ public class CalcGUI extends JPanel{
     	exact = new JRadioButton("Exact");
     	exact.setSelected(true);
         exact.addActionListener(customListener);
+		exact.setOpaque(false);
     	c = new GridBagConstraints();
     	c.insets = new Insets(0, 0, 5, 0); c.gridx = 0; c.gridy = 1;
     	outputs.add(exact, c);
     	
     	rounded = new JRadioButton("Rounded");
         rounded.addActionListener(customListener);
+		rounded.setOpaque(false);
     	c = new GridBagConstraints();
     	c.insets = new Insets(0, 0, 5, 0); c.gridx = 1; c.gridy = 1;
     	outputs.add(rounded, c);
@@ -272,6 +282,7 @@ public class CalcGUI extends JPanel{
         numPounds.setHorizontalAlignment(JLabel.CENTER);
         numPounds.setFont(new Font("Monospaced", Font.BOLD, 25));
         numPounds.setBorder(BorderFactory.createLoweredBevelBorder());
+		numPounds.setOpaque(true);
     	c = new GridBagConstraints(); c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0; c.gridy = 3; c.gridwidth = 2;
         outputs.add(numPounds, c);
@@ -289,6 +300,7 @@ public class CalcGUI extends JPanel{
         numNuggets.setHorizontalAlignment(JLabel.CENTER);
         numNuggets.setFont(new Font("Monospaced", Font.BOLD, 25));
         numNuggets.setBorder(BorderFactory.createLoweredBevelBorder());
+		numNuggets.setOpaque(true);
     	c = new GridBagConstraints(); c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0; c.gridy = 5; c.gridwidth = 2;
         outputs.add(numNuggets, c);
@@ -300,18 +312,6 @@ public class CalcGUI extends JPanel{
     	c = new GridBagConstraints(); c.insets = new Insets(30, 0, 20, 0);
         c.fill = GridBagConstraints.NONE; c.gridx = 0; c.gridy = 6; c.gridwidth = 2;
 		outputs.add(logoutButton, c);
-
-
-        // Add a splash of color to the panels
-		Color outputsColor = new Color(246, 255, 0);
-		Color buttonColor = new Color(0, 0, 255);
-        outputs.setBackground(outputsColor);
-        exact.setBackground(outputsColor);
-        rounded.setBackground(outputsColor);
-		percentInputs.setBackground(Color.RED);
-		percentSlider.setBackground(Color.RED);
-		weightText.setBackground(Color.RED);
-		weightButtons.setBackground(buttonColor);
 
     	// Add everything in
     	this.add(inputs);

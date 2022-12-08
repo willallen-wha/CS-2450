@@ -16,6 +16,7 @@ public class AdjustOS {
 
     // Variables to be adjusted
     public static String LOGOPATH = "GUI/Graphics/Logo.png";
+    public static String BACKGROUNDPATH = "GUI/Graphics/Background.png";
     public static String USERSPATH = "Auth/Users.txt";
     public static int FRAMEWIDTH = 580;
 
