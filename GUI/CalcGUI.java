@@ -255,6 +255,7 @@ public class CalcGUI extends JPanel{
     	exact.setSelected(true);
         exact.addActionListener(customListener);
 		exact.setOpaque(false);
+		exact.setBorderPainted(false);
     	c = new GridBagConstraints();
     	c.insets = new Insets(0, 0, 5, 0); c.gridx = 0; c.gridy = 1;
     	outputs.add(exact, c);
@@ -262,6 +263,7 @@ public class CalcGUI extends JPanel{
     	rounded = new JRadioButton("Rounded");
         rounded.addActionListener(customListener);
 		rounded.setOpaque(false);
+		rounded.setBorderPainted(false);
     	c = new GridBagConstraints();
     	c.insets = new Insets(0, 0, 5, 0); c.gridx = 1; c.gridy = 1;
     	outputs.add(rounded, c);
