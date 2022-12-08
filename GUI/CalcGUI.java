@@ -10,6 +10,8 @@ import java.awt.event.*;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
+
+import Common.AdjustOS;
 import Common.NuggetMath;
 
 /**
@@ -515,7 +517,7 @@ public class CalcGUI extends JPanel{
 		//Add a link to notify the user of this error
 		numNuggets.addMouseListener(new MouseInputAdapter() {
 			public void mousePressed(MouseEvent e) {
-				JOptionPane.showMessageDialog(numNuggets.getParent(), err);
+				JOptionPane.showMessageDialog(numNuggets.getParent(), err, error, JOptionPane.ERROR_MESSAGE);
 			}
 		});
 	}
