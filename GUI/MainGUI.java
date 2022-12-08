@@ -2,6 +2,7 @@ package GUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Taskbar;
 import java.io.File;
@@ -73,7 +74,10 @@ public class MainGUI {
                 frame.add(background);
                 background.add(calc);
             }
-            else frame.add(calc);
+            else {
+                calc.setBackground(new Color(0, 120, 216));
+                frame.add(calc);
+            }
         }
         // If it's a Calc GUI, logout requested, replace it with a new Auth GUI
         else if(p instanceof CalcGUI) {
