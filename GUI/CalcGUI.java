@@ -4,14 +4,12 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.MouseInputAdapter;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import Common.AdjustOS;
 import Common.NuggetMath;
 
 /**
@@ -477,15 +475,17 @@ public class CalcGUI extends JPanel{
 		numPounds.setText("ERR");
 
 		//Output the useful bit of the error
-		String errorMessage = error;
+		String errorMessage = error, title = error;
 		if(error == ERR_BADPERCENT) {
 			numNuggets.setText("<html>E1<u>(?)</u><html>");
+			title = "Error 01";
 			errorMessage += "\nA bad percentage was entered." +
 			"\nThis likely means there is an unrecognized character included." +
 			"\nPlease remove everything which isn't a number.";
 		}
 		else if(error == ERR_BADWEIGHT) {
 			numNuggets.setText("<html>E2<u>(?)</u><html>");
+			title = "Error 02";
 			errorMessage += "\nA bad weight was entered." +
 			"\nThis likely means there is an unrecognized character included." +
 			"\nPlease remove everything which isn't a number. Also ensure" +
@@ -493,6 +493,7 @@ public class CalcGUI extends JPanel{
 		}
 		else if(error == ERR_NONLOGICAL) {
 			numNuggets.setText("<html>E3<u>(?)</u><html>");
+			title = "Error 03";
 			errorMessage += "\nA non-logical input was given." +
 			"\nThis likely means the percentage is a non-logical value." +
 			"\nNegative percentages or percentages over 100 can result in" +
@@ -500,12 +501,14 @@ public class CalcGUI extends JPanel{
 		}
 		else if(error == ERR_PERCENT100) {
 			numNuggets.setText("<html>E4<u>(?)</u><html>");
+			title = "Error 04";
 			errorMessage += "\nA percentage of 100 was entered." +
 			"\nThis is not mathematically possible. Please enter" +
 			"\na percentage between 0 and 100.";
 		}
 		else {
 			numNuggets.setText("<html>E5<u>(?)</u><html>");
+			title = "Error 05";
 			errorMessage += "\nAn unknown error was encountered" +
 			"\nPlease notify the software distributer and include" +
 			"\na description of how this error was encountered.";
@@ -513,11 +516,13 @@ public class CalcGUI extends JPanel{
 
 		//The message dialouge prefers a final string
 		final String err = errorMessage;
+		final String titleString = title;
 
 		//Add a link to notify the user of this error
 		numNuggets.addMouseListener(new MouseInputAdapter() {
 			public void mousePressed(MouseEvent e) {
-				JOptionPane.showMessageDialog(numNuggets.getParent(), err, error, JOptionPane.ERROR_MESSAGE);
+				//Popup the error message with proper notification icon
+				JOptionPane.showMessageDialog(numNuggets.getParent(), err, titleString, JOptionPane.ERROR_MESSAGE);
 			}
 		});
 	}
