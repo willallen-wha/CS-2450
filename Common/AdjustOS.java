@@ -15,9 +15,9 @@ public class AdjustOS {
     public static final String OTH = "Other";
 
     // Variables to be adjusted
-    public static String LOGOPATH = "GUI/Graphics/Logo.png";
-    public static String BACKGROUNDPATH = "GUI/Graphics/Background.png";
-    public static String USERSPATH = "Auth/Users.txt";
+    public static String LOGOPATH = "/GUI/Graphics/Logo.png";
+    public static String BACKGROUNDPATH = "/GUI/Graphics/Background.png";
+    public static String USERSPATH = "/Auth/Users.txt";
     public static int FRAMEWIDTH = 580;
 
     /**
@@ -32,8 +32,9 @@ public class AdjustOS {
         // Check for recognized OS
         if(temp.contains("windows")) {
             OS = WIN;
-            LOGOPATH = LOGOPATH.replaceAll("/", "\\\\");
-            USERSPATH = USERSPATH.replaceAll("/", "\\\\");
+            // LOGOPATH = LOGOPATH.replaceAll("/", "\\\\");
+            // USERSPATH = USERSPATH.replaceAll("/", "\\\\");
+            // BACKGROUNDPATH = BACKGROUNDPATH.replaceAll("/", "\\\\");
             FRAMEWIDTH = 500;
         }
         else if(temp.contains("mac")) {

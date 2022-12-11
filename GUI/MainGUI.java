@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Taskbar;
-import java.io.File;
 import java.io.IOException;
 
 import Common.*;
@@ -30,13 +29,13 @@ public class MainGUI {
         try {
             // Set the logo
             Image logo;
-            logo = ImageIO.read(new File(AdjustOS.LOGOPATH));
+            logo = ImageIO.read(MainGUI.class.getResource(AdjustOS.LOGOPATH));
             frame.setIconImage(logo);
             // Attempt to set the Apple dock as well
             if(AdjustOS.OS == AdjustOS.MAC) taskbar.setIconImage(logo);
 
             // Set the background
-            Image backIm = ImageIO.read(new File(AdjustOS.BACKGROUNDPATH));
+            Image backIm = ImageIO.read(MainGUI.class.getResource(AdjustOS.BACKGROUNDPATH));
             backIm = backIm.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
             background = new BackgroundPanel(backIm);
         } catch (IOException e) {

@@ -3,37 +3,12 @@ package Auth;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
+
 import Common.*;
 
 public class Authenticator {
-	public static void main (String[] args) throws IOException {
-		//Creating Variables
-		boolean user = false;
-		String userName = null;
-		String userPass = null;
-		
-		//Making the Scanner
-		@SuppressWarnings("resource")
-		Scanner in = new Scanner(System.in);
-		//Asking the user to input user name
-		System.out.println("Hello User!");
-			do {
-				//Gets the user name and password from the user
-				System.out.println("Please enter your user name!");
-				userName = in.nextLine();
-				System.out.println("Please enter your password!");
-				userPass = in.nextLine();
-				user = users(userName, userPass);
-				
-				if(user == true) {
-					System.out.println("Welcome " + userName + "!");
-				}
-				else {
-					System.out.println("Authentication failed, please try again.");
-				}
-			} while (user == false);
-	}
 
 	public static Boolean users(String inputedUser, String inputedPass) throws IOException {
 		//Creating Variables
@@ -41,7 +16,7 @@ public class Authenticator {
 		String fileUser = null;
 		
 		//Finds the file
-		File users = new File(AdjustOS.USERSPATH);
+		InputStream users = Authenticator.class.getResourceAsStream(AdjustOS.USERSPATH);
 		//Creating file reader
 		Scanner fileReader = new Scanner(users);
 		
