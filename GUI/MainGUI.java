@@ -11,33 +11,32 @@ import java.io.IOException;
 import Common.*;
 import GUI.Graphics.BackgroundPanel;
 
-public class MainGUI {
+public class MainGUI extends JFrame {
 
-    public static JFrame frame;
     public static BackgroundPanel background;
 
-    public static void main(String args[]) {
+    public MainGUI() {
 
         // Make sure OS is set
         AdjustOS.detectOS();
 
         // Set up look and feel of window
-        frame = new JFrame("CS-2450 Project");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(AdjustOS.FRAMEWIDTH, 400);
+        this.setTitle("CS-2450 Project");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(AdjustOS.FRAMEWIDTH, 400);
         background = null;
         final Taskbar taskbar = Taskbar.getTaskbar();
         try {
             // Set the logo
             Image logo;
-            logo = ImageIO.read(new File(AdjustOS.LOGOPATH));
-            frame.setIconImage(logo);
+            logo = ImageIO.read(new File(getClass().getResource(AdjustOS.LOGOPATH).toURI()));
+            this.setIconImage(logo);
             // Attempt to set the Apple dock as well
             if(AdjustOS.OS == AdjustOS.MAC) taskbar.setIconImage(logo);
 
             // Set the background
-            Image backIm = ImageIO.read(new File(AdjustOS.BACKGROUNDPATH));
-            backIm = backIm.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
+            Image backIm = ImageIO.read(new File(getClass().getResource(AdjustOS.BACKGROUNDPATH).toURI()));
+            backIm = backIm.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
             background = new BackgroundPanel(backIm);
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,11 +47,14 @@ public class MainGUI {
         } catch (UnsupportedOperationException e) {
             e.printStackTrace();
             System.out.println("Error detecting the OS, using default logo.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Unknown error occurred, using the default logo.");
         }
         // Create a new auth window to force sign-in
-        AuthGUI auth = new AuthGUI();
-        frame.add(auth);
-        frame.setVisible(true);
+        AuthGUI auth = new AuthGUI(this);
+        this.add(auth);
+        this.setVisible(true);
     }
 
     /**
@@ -63,33 +65,33 @@ public class MainGUI {
      * 
      * @return None.
      */
-    public static void exit(JPanel p) {
+    public void exit(JPanel p) {
         // Check requested close type
         // If it's an Auth GUI, auth is complete, replace it with a new Calc GUI
         if(p instanceof AuthGUI) {
-            frame.remove(p);
-            CalcGUI calc = new CalcGUI();
+            this.remove(p);
+            CalcGUI calc = new CalcGUI(this);
             // Check to see if the background is set
             if(background != null) {
-                frame.add(background);
+                this.add(background);
                 background.add(calc);
             }
             else {
                 calc.setBackground(new Color(0, 120, 216));
-                frame.add(calc);
+                this.add(calc);
             }
         }
         // If it's a Calc GUI, logout requested, replace it with a new Auth GUI
         else if(p instanceof CalcGUI) {
-            AuthGUI auth = new AuthGUI();
+            AuthGUI auth = new AuthGUI(this);
             //Remove the background if valid
             if(background != null) {
                 background.remove(p);
-                frame.remove(background);
+                this.remove(background);
             }
-            else frame.remove(p);
-            frame.add(auth);
+            else this.remove(p);
+            this.add(auth);
         }
-        frame.validate();
+        this.validate();
     }
 }

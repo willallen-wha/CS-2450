@@ -14,6 +14,10 @@ public class AuthGUI extends JPanel {
     private JTextField username;
     private JPasswordField password;
     private JButton signInButton, registerButton;
+    private MainGUI container;
+    
+    // The authenticator object which handles authentication
+    private Authenticator auth;
 
     private static String ERR_IO = "<html>Error accessing users.<br>Please check network<br>and try again.</html>";
     private static String ERR_BAD_CRED = "<html>Invalid username/password.<br>Please try again.</html>";
@@ -23,8 +27,11 @@ public class AuthGUI extends JPanel {
      * @param None
      * @return A new instance of a JPanel object to be used in the authenticator.
      */
-    public AuthGUI() {
+    public AuthGUI(MainGUI parent) {
         
+        // Get the MainGUI which called this object
+        container = parent;
+
     	// Set the overarching layout for Auth GUI
     	setLayout(new GridBagLayout());
 
@@ -78,6 +85,9 @@ public class AuthGUI extends JPanel {
         c.fill = GridBagConstraints.NONE; c.weighty = 1; c.gridx = 3; c.gridy = 3; c.gridwidth = 1;
         this.add(registerButton, c);
 
+        // Create the authenticator
+        auth = new Authenticator();
+
     }
 
     private ActionListener customListener = new ActionListener() {
@@ -94,11 +104,11 @@ public class AuthGUI extends JPanel {
                     String pass = String.valueOf(password.getPassword());
                     // Trying to register?
                     if(e.getSource() == registerButton) {
-                        Authenticator.createNewUser(user, pass);
+                        auth.createNewUser(user, pass);
                         statusLabel.setText("<html>User successfully registered.<br>Please sign in.</html>");
                     }
                     //Trying to sign in?
-                    else if(Authenticator.users(user, pass)) {
+                    else if(auth.users(user, pass)) {
                         // Sign in sucessful, request closure
                         statusLabel.setText("Success! Logging you in...");
                         requestExit();
@@ -124,7 +134,7 @@ public class AuthGUI extends JPanel {
 	 * @see MainGUI.exit
 	 */
     private void requestExit() {
-        MainGUI.exit(this);
+		container.exit(this);
     }
 
 }

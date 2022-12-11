@@ -9,8 +9,9 @@ public class Driver {
         // Set the OS family correctly
         AdjustOS.detectOS();
 
-        // Start the MainGUI family of actions
-        MainGUI.main(args);
+        // Create a new MainGUI object
+        @SuppressWarnings("unused")
+        MainGUI start = new MainGUI();
     }
 
 }
