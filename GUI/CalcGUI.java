@@ -27,7 +27,6 @@ public class CalcGUI extends JPanel{
 	private JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnClr, btn0, btnPer;
 	private JRadioButton exact, rounded;
 	private ButtonGroup outputMode;
-	private MainGUI container;
 
 	// Some constant error codes
 	private static final String ERR_BADPERCENT = "Bad percent";
@@ -47,10 +46,7 @@ public class CalcGUI extends JPanel{
      * @param None
      * @return A new instance of a JPanel object to be used in the calculator.
      */
-    public CalcGUI(MainGUI parent) {
-
-		// Set the parent of this GUI
-		container = parent;
+    public CalcGUI() {
 
     	// Establish the gridbag objects for later use
     	GridBagLayout l;
@@ -473,7 +469,7 @@ public class CalcGUI extends JPanel{
 	 * @see MainGUI.exit
 	 */
 	private void requestExit() {
-		container.exit(this);
+		MainGUI.exit(this);
 	}
 
 	private void error(String error) {
