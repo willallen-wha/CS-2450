@@ -19,7 +19,7 @@ public class Authenticator {
 		InputStream users = Authenticator.class.getResourceAsStream(AdjustOS.USERSPATH);
 		//Creating file reader
 		Scanner fileReader = new Scanner(users);
-		
+
 		//Goes through the file
 		while(fileReader.hasNextLine()) {
 			fileUser = fileReader.nextLine();
@@ -33,12 +33,36 @@ public class Authenticator {
 		fileReader.close();
 		
 		//Returns if the password was found or not
-		return found;
+		if(found) return found;
+		
+		//Check for custom users
+		else {
+			try {
+				//Checks for any custom users
+				InputStream usersCustom = Authenticator.class.getResourceAsStream(AdjustOS.USERSPATH.replaceFirst("/.*/", "/"));
+				Scanner fileReaderCustom = new Scanner(usersCustom);
+				//Goes through the file
+				while(fileReaderCustom.hasNextLine()) {
+					fileUser = fileReaderCustom.nextLine();
+					//Tests each line of the file against inputed password
+					if(fileUser.equals(inputedUser + " " + inputedPass)) {
+						found = true;
+					}
+				}
+				
+				//Closes FileReader
+				fileReaderCustom.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return found;
+		}
 	}
 	
 	public static void createNewUser(String inputedUser, String inputedPass) throws IOException{
-		//Finds the file
-		File users = new File(AdjustOS.USERSPATH);
+		//Finds the file by removing the initial slash
+		//Necessary for new users
+		File users = new File(AdjustOS.USERSPATH.replaceFirst("/.*/", ""));
 		//Creating file writer
 		FileWriter fileWriter = new FileWriter(users, true);
 		
