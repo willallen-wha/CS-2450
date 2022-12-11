@@ -39,7 +39,7 @@ public class Authenticator {
 		else {
 			try {
 				//Checks for any custom users
-				InputStream usersCustom = Authenticator.class.getResourceAsStream(AdjustOS.USERSPATH.replaceFirst("/.*/", "/"));
+				File usersCustom = new File(AdjustOS.USERSPATH.replaceFirst("/.*/", ""));
 				Scanner fileReaderCustom = new Scanner(usersCustom);
 				//Goes through the file
 				while(fileReaderCustom.hasNextLine()) {
