@@ -53,7 +53,7 @@ public class Authenticator {
 				//Closes FileReader
 				fileReaderCustom.close();
 			} catch (Exception e) {
-				e.printStackTrace();
+				
 			}
 			return found;
 		}

@@ -8,7 +8,7 @@ import java.awt.Taskbar;
 import java.io.IOException;
 
 import Common.*;
-import GUI.Graphics.BackgroundPanel;
+import GUI.Graphics.*;
 
 public class MainGUI {
 
